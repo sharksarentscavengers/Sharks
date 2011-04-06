@@ -1,0 +1,23 @@
+<VirtualHost *:80>
+    ServerAdmin webmaster@gps-snitch.com
+
+    ServerName www.lonergps.com
+    ServerAlias lonergps.com dev.lonergps.com
+    DocumentRoot /var/www/www.lonergps.com/htdocs
+    <Directory /var/www/www.lonergps.com/htdocs/>
+        Options +ExecCGI FollowSymLinks MultiViews
+        AllowOverride All
+        Order allow,deny
+        allow from all
+    </Directory>
+
+    ErrorLog /var/log/apache2/www.lonergps.com-error.log
+
+    # Possible values include: debug, info, notice, warn, error, crit,
+    # alert, emerg.
+    LogLevel warn
+
+    CustomLog /var/log/apache2/www.lonergps.com-access.log combined
+    ServerSignature On
+
+</VirtualHost>
