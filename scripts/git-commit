@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Change to the root directory for this project
+SCRIPT_DIR=`dirname $(readlink -f $0)`
+ROOT_DIR=`dirname $SCRIPT_DIR`
+cd $ROOT_DIR
+
+echo
+echo "*** Current GIT status"
+git status #-w > diff.txt
+
+echo
+echo -n "Do you want to commit the above changes (y/n)? [y] "
+read X
+if [ "$X" = "" ] || [ "$X" = "y" ] || [ "$X" = "Y" ]; then
+    git add *
+    git commit
+    git push origin master
+fi

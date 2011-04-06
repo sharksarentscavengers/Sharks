@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# Change to the root directory for this project
+SCRIPT_DIR=`dirname $(readlink -f $0)`
+ROOT_DIR=`dirname $SCRIPT_DIR`
+cd $ROOT_DIR
+
+echo "*** Running the ant svn.pre-commit target"
+ant svn.pre-commit
+
+if [ $? -ne 0 ]; then
+    exit 1;
+fi
+
+echo
+echo "*** Creating SVN diff in $ROOT_DIR/diff.txt"
+svn diff -x -w > diff.txt
+
+echo
+echo "*** Current SVN status"
+svn status --ignore-externals | grep -v "^X "
+
+echo
+echo -n "Do you want to commit the above changes (y/n)? [y] "
+read X
+if [ "$X" = "" ] || [ "$X" = "y" ] || [ "$X" = "Y" ]; then
+    svn commit
+
+    # Removing diff.txt
+    rm -f diff.txt
+    touch diff.txt
+fi

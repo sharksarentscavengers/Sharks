@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# Change to the root directory for this project
+SCRIPT_DIR=`dirname $(readlink -f $0)`
+ROOT_DIR=`dirname $SCRIPT_DIR`
+cd $ROOT_DIR
+
+echo
+echo "*** Creating SVN diff in $ROOT_"
+git status #-w > diff.txt
+
+#echo
+#echo "*** Current GIT status"
+
+
+#echo
+#echo -n "Do you want to commit the above changes (y/n)? [y] "
+#read X
+#if [ "$X" = "" ] || [ "$X" = "y" ] || [ "$X" = "Y" ]; then
+#    svn commit
+
+    # Removing diff.txt
+#    rm -f diff.txt
+#    touch diff.txt
+#fi
